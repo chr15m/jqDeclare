@@ -7,12 +7,25 @@
     <link rel="stylesheet" type="text/css" href="//chr15m.github.io/minimal-stylesheet/minimal.css" >
     <link rel="stylesheet" type="text/css" href="//chr15m.github.io/minimal-stylesheet/minimal-inputs.css" >
     <script src="//code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-    <script src="jquery.declarative.js"></script>
+    <script src="jquery.declare.js"></script>
   </head>
   <body>
-    <h1>jqDeclarative examples</h1>
+    <h1>jqDeclare examples &amp; tests</h1>
     
-    <p>This is a collection of tests and example usage of jqDeclarative.</p>
+    <p>jqDeclare is a jQuery plugin for building React-style user interface components.</p>
+
+    <p>This is a collection of tests and examples using the plugin.</p>
+
+    <p>You can <a href='https://github.com/chr15m/jqDeclare/'>find the source code here</a>.</p>
+
+    <p><code>&lt;script src="https://chr15m.github.io/jqDeclare/jquery.declare.js"&gt;&lt;/script&gt;</code></p>
+
+    <div id="SimpleExample"></div>
+    <script>
+      $("#SimpleExample").declare(function (name) {
+        return ["button", {"click": function(ev) { alert("Hello " + name); }}, "say hello"];
+      }).render("Taylor");
+    </script>
 
     <div id="Example"></div>
     <script>
@@ -24,9 +37,8 @@
       }).render(count);
     </script>
 
-    <div id="DataBinding Example"></div>
-    <script>
-    </script>
+    // TODO: data binding example
+    // TODO: sub-component example
 
     <h2>Tests</h2>
 
