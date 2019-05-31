@@ -12,33 +12,33 @@
   <body>
     <h1>jqDeclare examples &amp; tests</h1>
     
-    <p>jqDeclare is a jQuery plugin for building React-style user interface components.</p>
+    <p>jqDeclare is a jQuery plugin for building React-style declarative user interface components.</p>
 
     <p>This is a collection of tests and examples using the plugin.</p>
 
     <p>You can <a href='https://github.com/chr15m/jqDeclare/'>find the source code here</a>.</p>
 
-    <p><code>&lt;script src="https://chr15m.github.io/jqDeclare/jquery.declare.js"&gt;&lt;/script&gt;</code></p>
+    <p>Use: <code>&lt;script src="https://chr15m.github.io/jqDeclare/jquery.declare.js"&gt;&lt;/script&gt;</code></p>
 
-    <div id="SimpleExample"></div>
+    <div id="SimpleExample" title="Simple example"></div>
     <script>
       $("#SimpleExample").declare(function (name) {
         return ["button", {"click": function(ev) { alert("Hello " + name); }}, "say hello"];
       }).render("Taylor");
     </script>
 
-    <div id="Example"></div>
+    <div id="DataExample" title="Data updating example"></div>
     <script>
       var count = 0;
-      var el = $("#Example").declare(function(data) {
+      var el = $("#DataExample").declare(function(data) {
         return [
           ["button", {"click": function(ev) { el.render(++count); }}, "click me"],
           ["span", null, " <- clicked " + data + " time" + (count == 1 ? "" : "s") + "!"]];
       }).render(count);
     </script>
 
-    // TODO: data binding example
-    // TODO: sub-component example
+    <!-- // TODO: data binding example -->
+    <!-- // TODO: sub-component example -->
 
     <h2>Tests</h2>
 
@@ -135,10 +135,10 @@
       $("body > div").each(function(i, el) {
         var script = $(el).next().text().replace(/[&<>"'`=\/]/g, function (s) {
           return HTMLentityMap[s];
-          }).replace(/^    /gm, "") + "\n";
+          }).replace(/^      /gm, "") + "\n";
         var code = $("<code class='hljs javascript'>").html(script);
-        $(el).after($("<pre>").append(code));
-        $(el).before($("<h3>" + el.id + "</h3>"));
+        $(el).before($("<h3>" + (el.title ? el.title : el.id) + "</h3>"));
+        $(el).before($("<pre>").append(code));
       });
     </script>
 
