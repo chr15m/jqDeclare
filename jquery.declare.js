@@ -25,6 +25,7 @@
       // TODO: support react style multi children here
       var content = definition[2];
       var el = $(document.createElement(tag));
+      // TODO: special case textarea/input caret position?
       for (var a in attrs) {
         // pass through jquery callables or set attr
         if (el[a]) {
@@ -41,7 +42,7 @@
       return el;
     } else if ($.isFunction(definition)) { // function
       return jq_declarative_render(definition(data), data);
-    } else if (definition[0] && $.isArray(definition[0])) {
+    } else if (definition && definition[0] && $.isArray(definition[0])) {
       return definition.map(function (subdefinition) {
         return jq_declarative_render(subdefinition, data);
       });
