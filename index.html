@@ -12,7 +12,7 @@
   <body>
     <h1>jqDeclare examples &amp; tests</h1>
     
-    <p>jqDeclare is a jQuery plugin for building React-style declarative user interface components.</p>
+    <p>jqDeclare is a jQuery plugin for building React/Mithril/Vue-style declarative user interface components.</p>
 
     <p>This is a collection of tests and examples using the plugin.</p>
 
@@ -30,11 +30,27 @@
     <div id="DataExample" title="Data updating example"></div>
     <script>
       var count = 0;
-      var el = $("#DataExample").declare(function(data) {
+      var app1 = $("#DataExample").declare(function(data) {
         return [
-          ["button", {"click": function(ev) { el.render(++count); }}, "click me"],
+          ["button", {"click": function(ev) { app1.render(++count); }}, "click me"],
           ["span", null, " <- clicked " + data + " time" + (count == 1 ? "" : "s") + "!"]];
       }).render(count);
+    </script>
+
+    <div id="ComplexExample" title="More complex example"></div>
+    <script>
+      elements = [];
+      var app2 = $("#ComplexExample").declare(function(data) {
+        console.log(data);
+        return [["ul", null,
+          data.map(function(txt, i) {
+            return ["li", {}, [
+              ["input", {"val": txt, "type": "text", "keyup": function(ev) { elements[i] = ev.target.value; }}, null],
+              ["button", {"click": function(ev) { elements.splice(i, 1); app2.render(elements)}}, "X"]]];
+          })],
+          ["button", {"click": function(ev) {elements.push(""); app2.render(elements);} }, "add"]
+        ];
+      }).render(elements);
     </script>
 
     <!-- // TODO: data binding example -->
