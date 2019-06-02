@@ -27,6 +27,20 @@
       }).render("Taylor");
     </script>
 
+    <div id="TimerExample" title="setInterval example"></div>
+    <script>
+      var secs = 0;
+      
+      var app0 = $("#TimerExample").declare(function(data) {
+        return [
+          ["span", null, secs + " seconds have passed"]];
+      }).render(secs);
+      
+      setInterval(function() {
+        app0.render(++secs);
+      }, 1000);
+    </script>
+    
     <div id="DataExample" title="Data updating example"></div>
     <script>
       var count = 0;
@@ -41,7 +55,6 @@
     <script>
       elements = [];
       var app2 = $("#ComplexExample").declare(function(data) {
-        console.log(data);
         return [["ul", null,
           data.map(function(txt, i) {
             return ["li", {}, [
