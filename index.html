@@ -69,9 +69,8 @@
     <div id="AjaxExample" title="Ajax request example"></div>
     <script>
       var app3 = $("#AjaxExample").declare(function(readme) {
-        console.log("readme", readme);
         return [
-          ["span", null, readme ? "First line of README.md is:" + readme.split("\n")[0] : "README.md loading..."]];
+          ["span", null, readme ? "First line of README.md is: " + readme.split("\n")[0] : "README.md loading..."]];
       }).render();
       
       $.get("README.md", app3.render.bind(app3));
